@@ -1,0 +1,43 @@
+import java.time.LocalDate
+import kotlin.math.pow
+import java.util.Scanner
+
+fun processInput(input: Any?) {
+    when (input) {
+        is String -> {
+            println("Я получил тип String = '$input', ее длина равна ${input.length} символов")
+        }
+        is Int -> {
+            val square = input.toDouble().pow(2)
+            println("Я получил Int = $input, его квадрат равен $square")
+        }
+        is Double -> {
+            val roundedValue = "%.2f".format(input)
+            println("Я получил Double = $input, это число округляется до $roundedValue")
+        }
+        is LocalDate -> {
+            val tinkoffFoundationDate = LocalDate.of(2006, 12, 24)
+            val comparisonResult = if (input.isBefore(tinkoffFoundationDate)) "меньше" else "не меньше"
+            println("Я получил LocalDate = $input, эта дата $comparisonResult чем дата основания Tinkoff")
+        }
+        null -> println("Объект равен null")
+        else -> println("Мне этот тип неизвестен")
+    }
+}
+
+fun main() {
+    val scanner = Scanner(System.`in`)
+    
+    println("Введите значение:")
+    val inputString = scanner.nextLine()
+
+    val input: Any? = when {
+        inputString.isBlank() -> null
+        inputString.toIntOrNull() != null -> inputString.toInt()
+        inputString.toDoubleOrNull() != null -> inputString.toDouble()
+        inputString.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) -> LocalDate.parse(inputString)
+        else -> inputString
+    }
+
+    processInput(input)
+}
