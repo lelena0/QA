@@ -1,0 +1,19 @@
+import java.util.Scanner
+
+fun main() {
+    val scanner = Scanner(System.`in`)
+
+    print("Введите строку: ")
+    val string = scanner.nextLine()
+
+    print("Введите искомый символ: ")
+    val char = scanner.next()[0]
+
+    val count = string.count { it == char }
+
+    if (count > 0) {
+        println("Количество символов '$char' в строке \"$string\" == $count")
+    } else {
+        println("Символ '$char' в строке \"$string\" не найден")
+    }
+}
