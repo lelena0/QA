@@ -1,19 +1,18 @@
-import java.util.Scanner
+fun countCharacters(input: String, targetChar: Char): String {
+    val count = input.count { it == targetChar }
+    return if (count > 0) {
+        "Количество символов '$targetChar' в строке \"$input\" == $count"
+    } else {
+        "Символ '$targetChar' в строке \"$input\" не найден"
+    }
+}
 
 fun main() {
-    val scanner = Scanner(System.`in`)
+    val input1 = "Молоко"
+    val targetChar1 = 'о'
+    println(countCharacters(input1, targetChar1))
 
-    print("Введите строку: ")
-    val string = scanner.nextLine()
-
-    print("Введите искомый символ: ")
-    val char = scanner.next()[0]
-
-    val count = string.count { it == char }
-
-    if (count > 0) {
-        println("Количество символов '$char' в строке \"$string\" == $count")
-    } else {
-        println("Символ '$char' в строке \"$string\" не найден")
-    }
+    val input2 = "Молоко"
+    val targetChar2 = 'а'
+    println(countCharacters(input2, targetChar2))
 }
