@@ -1,9 +1,19 @@
 abstract class Pet {
     abstract val runSpeed: Double
     abstract val swimSpeed: Double
-    
-    val totalSpeed: Double
-        get() = runSpeed + swimSpeed
+    abstract val totalSpeed: Double
+
+    fun run() {
+        println("I am a ${this.javaClass.simpleName}, and I am running.")
+    }
+
+    fun swim() {
+        println("I am a ${this.javaClass.simpleName}, and I am swimming.")
+    }
+}
+
+interface Runnable {
+    fun run()
 }
 
 interface Swimmable {
@@ -11,21 +21,42 @@ interface Swimmable {
 }
 
 class Cat(override val runSpeed: Double, override val swimSpeed: Double) : Pet(), Runnable, Swimmable {
+    override val totalSpeed: Double
+        get() = runSpeed + swimSpeed
+
     override fun run() {
-        println("I am a Cat, and I am running")
+        println("I am a ${this.javaClass.simpleName}, and I am running.")
     }
-    
+
     override fun swim() {
-        println("I am a Cat, and I am swimming")
+        println("I am a ${this.javaClass.simpleName}, and I am swimming.")
     }
 }
 
 class Fish(override val runSpeed: Double, override val swimSpeed: Double) : Pet(), Swimmable {
+    override val totalSpeed: Double
+        get() = swimSpeed
+
     override fun swim() {
-        println("I am a Fish, and I am swimming")
+        println("I am a ${this.javaClass.simpleName}, and I am swimming.")
     }
 }
 
+class Tiger(runSpeed: Double, swimSpeed: Double) : Cat(runSpeed, swimSpeed)
+class Lion(runSpeed: Double, swimSpeed: Double) : Cat(runSpeed, swimSpeed)
+class Salmon(runSpeed: Double, swimSpeed: Double) : Fish(runSpeed, swimSpeed)
+class Tuna(runSpeed: Double, swimSpeed: Double) : Fish(runSpeed, swimSpeed)
+
+fun main() {
+    val tiger = Tiger(20.0, 10.0)
+    tiger.run()
+    tiger.swim()
+    println("Tiger's total speed: ${tiger.totalSpeed}")
+
+    val salmon = Salmon(0, 15.0)
+    salmon.swim()
+    println("Salmon's total speed: ${salmon.totalSpeed}")
+}
 class Tiger(runSpeed: Double, swimSpeed: Double) : Cat(runSpeed, swimSpeed) {
     override fun run() {
         println("I am a Tiger, and I am running")
@@ -56,7 +87,7 @@ fun main() {
     tiger.swim()
     println("Tiger total speed: ${tiger.totalSpeed}")
     
-    val salmon = Salmon(5.0, 15.0)
+    val salmon = Salmon(0, 15.0)
     salmon.swim()
     println("Salmon total speed: ${salmon.totalSpeed}")
 }
