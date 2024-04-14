@@ -1,6 +1,5 @@
 import java.time.LocalDate
 import kotlin.math.pow
-import java.util.Scanner
 
 fun processInput(input: Any?) {
     when (input) {
@@ -26,18 +25,9 @@ fun processInput(input: Any?) {
 }
 
 fun main() {
-    val scanner = Scanner(System.`in`)
-    
-    println("Введите значение:")
-    val inputString = scanner.nextLine()
+    val input1: Any? = "Молоко"
+    val input2: Any? = 2.356
 
-    val input: Any? = when {
-        inputString.isBlank() -> null
-        inputString.toIntOrNull() != null -> inputString.toInt()
-        inputString.toDoubleOrNull() != null -> inputString.toDouble()
-        inputString.matches(Regex("\\d{4}-\\d{2}-\\d{2}")) -> LocalDate.parse(inputString)
-        else -> inputString
-    }
-
-    processInput(input)
+    processInput(input1)
+    processInput(input2)
 }
